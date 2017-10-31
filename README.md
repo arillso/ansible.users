@@ -7,7 +7,7 @@ This is an Ansible role which users and user's authorized keys manages.
 ## Installation
 
 ```
-$ ansible-galaxy install sbaerlocher.users
+$ ansible-galaxy install arillso.users
 ```
 
 ## Requirements
@@ -35,7 +35,7 @@ None
 ```yml
 - hosts: all
   roles:
-     - sbaerlocher.users
+     - arillso.users
 ```
 
 ## Changelog
