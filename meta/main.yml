@@ -21,13 +21,7 @@ galaxy_info:
         - 7
     - name: Windows
       versions:
-        - Windows 10
-        - Windows Server 2016
+        - 10
+        - 2016
   galaxy_tags:
-    - windows
-    - linux
-    - users
-
-  categories:
-    - Windows
-    - Linux
+    - system
