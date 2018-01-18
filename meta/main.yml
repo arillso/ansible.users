@@ -18,3 +18,11 @@ galaxy_info:
       versions:
         - 6
         - 7
+    - name: Windows
+      versions:
+        - Windows 10
+        - Windows Server 2016
+  galaxy_tags:
+    - Windows
+    - Linux
+    - Users

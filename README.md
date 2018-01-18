@@ -2,7 +2,7 @@
 
 ## Description
 
-This is an Ansible role which users and user's authorized keys manages.
+This is an Ansible role which users and user's authorized keys manages on Linux and Windows.
 
 ## Installation
 
@@ -18,13 +18,12 @@ None
 
 | Variable             | Default     | Comments (type)                                   |
 | :---                 | :---        | :---                                              |
-| users | [] | list of users to add |
+| users | [] | list of users to add, See defaults |
 | users_home | /home |  users home directory |
 | users_home_mode | "0755" | default user's home directory permissions |
 | users_ssh_key_type | rsa | default user's ssh key type |
 | users_ssh_key_bits | 2048 | default user's ssh key bits |
 | users_authorized_keys_exclusive | no |  default user's setting for authorized keys exclusive |
-| users_remove | [] | list of users to be removed |
 
 ## Dependencies
 

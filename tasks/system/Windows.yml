@@ -4,6 +4,8 @@
 - name: Windows | adding users
   win_user:
     name: "{{ item.username }}"
+    fullname: "{{ item.name | default(omit) }}"
+    description: "{{ item.description | default('Windows User') }}"
     password: "{{ item.password | default(lookup('password')) }}"
     groups: "{{ item.groups }}"
   with_items: "{{ users }}"
@@ -14,4 +16,4 @@
     name: "{{ item.username }}"
     type: dword
   with_items: "{{ users }}"
-  when: item.loginhide
+  when: item.hide

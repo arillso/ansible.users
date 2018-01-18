@@ -24,6 +24,14 @@
 #     update_password: always
 #
 
+# users:
+#   - username: foobar              (required)
+#     name: Foo Bar
+#     description: User
+#     password: xxxxx
+#     groups: ["adm", "www-data"]
+#     hide: true
+
 # list of users to add
 users: []
 # users home directory
