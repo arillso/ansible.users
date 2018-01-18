@@ -24,6 +24,14 @@
 #     update_password: always
 #
 
+# users:
+#   - username: foobar              (required)
+#     name: Foo Bar
+#     description: User
+#     password: xxxxx
+#     groups: ["adm", "www-data"]
+#     hide: true
+
 # list of users to add
 users: []
 # users home directory
@@ -40,5 +48,3 @@ users_ssh_key_type: rsa
 users_ssh_key_bits: 2048
 # default user's setting for authorized keys exclusive
 users_authorized_keys_exclusive: no
-# list of users to be removed
-users_remove: []
