@@ -1,13 +1,15 @@
 # Ansible Role: users
 
+[![Build Status](https://travis-ci.org/arillso/ansible.users.svg?branch=master)](https://travis-ci.org/arillso/ansible.users) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://sbaerlo.ch/er/licence) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-users-blue.svg)](https://galaxy.ansible.com/arillso/users)
+
 ## Description
 
 This is an Ansible role which users and user's authorized keys manages on Linux and Windows.
 
 ## Installation
 
-```
-$ ansible-galaxy install arillso.users
+```bash
+ansible-galaxy install arillso.users
 ```
 
 ## Requirements
@@ -39,6 +41,10 @@ None
 
 ## Changelog
 
+### 1.1
+
+* add windows support
+
 ### 1.0
 
 * Initial release
@@ -47,7 +53,7 @@ None
 
 * [Simon Bärlocher](https://sbaerlocher.ch)
 * We Are Interactive
- 
+
 ## License
 
 This project is under the MIT License. See the [LICENSE](https://sbaerlo.ch/licence) file for the full license text.
