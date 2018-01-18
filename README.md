@@ -1,58 +1,53 @@
-# Docker Images: [Name]
+# Ansible Role: users
 
 ## Description
 
-## Build
+This is an Ansible role which users and user's authorized keys manages.
 
-Build from docker file
-
-```
-$ docker build -t sbaerlocher.users[name] .
-```
-
-Build from docker registry
+## Installation
 
 ```
-docker pull sbaerlocher.users[name]
+$ ansible-galaxy install arillso.users
 ```
 
-## run
+## Requirements
 
-```
-docker run --restart=always -d \
-    --name [name]  \
-    -h [name].sbaerlo.ch \ 
-    -v /:/ \
-    -p : \
-    sbaerlocher.users[name]
-```
+None
 
-### Options
+## Role Variables
 
+| Variable             | Default     | Comments (type)                                   |
+| :---                 | :---        | :---                                              |
+| users | [] | list of users to add |
+| users_home | /home |  users home directory |
+| users_home_mode | "0755" | default user's home directory permissions |
+| users_ssh_key_type | rsa | default user's ssh key type |
+| users_ssh_key_bits | 2048 | default user's ssh key bits |
+| users_authorized_keys_exclusive | no |  default user's setting for authorized keys exclusive |
+| users_remove | [] | list of users to be removed |
 
-| Name                  | Values               | Behaviour                                                                          |
-|:---------------------:|:--------------------:|:-----------------------------------------------------------------------------------|
-|                       |                      |                                                                                    |
-|                       |                      |                                                                                    |
-|                       |                      |                                                                                    |
-|                       |                      |                                                                                    |
-|                       |                      |                                                                                    |
-|                       |                      |                                                                                    |
-|                       |                      |                                                                                    |
-|                       |                      |                                                                                    |
+## Dependencies
 
+None
 
-#### Example:
+## Example Playbook
 
-```
-docker run -e  ... sbaerlocher.users[name]
+```yml
+- hosts: all
+  roles:
+     - arillso.users
 ```
 
 ## Changelog
 
+### 1.0
+
+* Initial release
+
 ## Author
 
 * [Simon Bärlocher](https://sbaerlocher.ch)
+* We Are Interactive
  
 ## License
 
@@ -60,4 +55,4 @@ This project is under the MIT License. See the [LICENSE](https://sbaerlo.ch/lice
 
 ## Copyright
 
-(c) 2016, Simon Bärlocher
+(c) 2017, Simon Bärlocher
