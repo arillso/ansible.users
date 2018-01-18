@@ -1,5 +1,8 @@
+---
+
 galaxy_info:
   author: arillso
+  description: This is an Ansible role which users and user's authorized keys manages on Linux and Windows.
   license: MIT
   min_ansible_version: 2
   platforms:
@@ -16,3 +19,8 @@ galaxy_info:
       versions:
         - 6
         - 7
+    - name: Windows
+      versions:
+        - all
+  galaxy_tags:
+    - system
