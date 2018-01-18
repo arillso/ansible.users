@@ -1,0 +1,17 @@
+---
+# tasks file for arillso.users
+
+- name: Windows | adding users
+  win_user:
+    name: "{{ item.username }}"
+    password: "{{ item.password | default(lookup('password')) }}"
+    groups: "{{ item.groups }}"
+  with_items: "{{ users }}"
+
+- name: Windows | hide user accounts from the login screen
+  win_regedit:
+    path: "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList"
+    name: "{{ item.username }}"
+    type: dword
+  with_items: "{{ users }}"
+  when: item.loginhide
