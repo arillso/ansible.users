@@ -59,3 +59,13 @@
   with_items: "{{ users }}"
   tags:
     - configuration
+
+- name: Linux | adding user's to sudo
+  become: yes
+  user:
+    name: "{{ item.username }}"
+    groups: "{{ 'sudo' if ansible_os_family == 'Debian' else 'wheel' }}"
+  when: item.sudo_user is defined 
+  with_items: "{{ users }}"
+  tags:
+    - configuration

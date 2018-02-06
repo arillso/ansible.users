@@ -6,8 +6,8 @@
     name: "{{ item.username }}"
     fullname: "{{ item.name | default(omit) }}"
     description: "{{ item.description | default('Windows User') }}"
-    password: "{{ item.password | default(lookup('password')) }}"
-    groups: "{{ item.groups }}"
+    password: "{{ item.password | default(omit) }}"
+    groups: "{{ item.groups | default('Benutzer') }}"
   with_items: "{{ users }}"
 
 - name: Windows | hide user accounts from the login screen
@@ -17,3 +17,12 @@
     type: dword
   with_items: "{{ users }}"
   when: item.hide
+
+# https://superuser.com/questions/182375/always-display-the-last-default-user-windows-7-welcome-screen/182382#182382
+- name: Windows | UAC enable 
+  win_regedit:
+    path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI"
+    name: EnumerateAdministrators
+    type: dword
+    data: 00000000
+
