@@ -41,6 +41,11 @@ None
 
 ## Changelog
 
+### 1.2
+
+* fix lint
+* new strucktur
+
 ### 1.1
 
 * add windows support
