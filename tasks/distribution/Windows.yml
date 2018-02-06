@@ -19,10 +19,9 @@
   when: item.hide
 
 # https://superuser.com/questions/182375/always-display-the-last-default-user-windows-7-welcome-screen/182382#182382
-- name: Windows | UAC enable 
+- name: Windows | UAC enable
   win_regedit:
     path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI"
     name: EnumerateAdministrators
     type: dword
     data: 00000000
-
