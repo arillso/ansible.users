@@ -8,6 +8,14 @@
     description: "{{ item.description | default('Windows User') }}"
     password: "{{ item.password | default(omit) }}"
     groups: "{{ item.groups | default('Benutzer') }}"
+    state: "{{ item.state | default('present') }}"
+    account_disabled: "{{ item.account_disabled | default('false') }}"
+    groups_action: "{{ item.groups_action | default('replace') }}"
+    account_locked: "{{ item.account_locked | default('false') }}"
+    password_never_expires: "{{ item.password_never_expires | default('true') }}"
+    update_password: "{{ item.update_password | default('on_create') }}"
+    password_expired: "{{ item.password_expired | default() }}"
+    user_cannot_change_password: "{{ item.user_cannot_change_password | default('false') }}"
   with_items: "{{ users }}"
 
 - name: Windows | hide user accounts from the login screen
