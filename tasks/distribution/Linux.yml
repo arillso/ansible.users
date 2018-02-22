@@ -2,7 +2,7 @@
 # tasks file for arillso.users
 
 - name: Linux | adding users
-  become: yes
+  become: true
   user:
     name: "{{ item.username }}"
     uid: "{{ item.uid | default(omit) }}"
@@ -21,11 +21,23 @@
     shell: "{{ item.shell | default(omit) }}"
     update_password: "{{ item.update_password | default(omit) }}"
   with_items: "{{ users }}"
+  no_log: "{{ true if item.password is defined or item.authorized_keys is defined else false }}"
+  tags:
+    - configuration
+
+- name: Linux | adding user's to sudo
+  become: true
+  user:
+    name: "{{ item.username }}"
+    groups: "{{ users_sudo_group }}"
+  when: item.sudo_user == true
+  with_items: "{{ users }}"
+  no_log: "{{ true if item.password is defined or item.authorized_keys is defined else false }}"
   tags:
     - configuration
 
 - name: Linux | setting user's home permission
-  become: yes
+  become: true
   file:
     dest: "{{ item.home | default(users_home ~ '/' ~ item.username) }}"
     owner: "{{ item.username }}"
@@ -33,11 +45,12 @@
     mode: "{{ item.home_mode if item.home_mode is defined else users_home_mode }}"
   when: item.home_create is not defined or item.home_create
   with_items: "{{ users }}"
+  no_log: "{{ true if item.password is defined or item.authorized_keys is defined else false }}"
   tags:
     - configuration
 
 - name: Linux | adding user's .ssh directory
-  become: yes
+  become: true
   file:
     path: "{{ item.home | default(users_home ~ '/' ~ item.username) }}/.ssh"
     owner: "{{ item.username }}"
@@ -46,26 +59,18 @@
     mode: '0700'
   when: item.home_create is not defined or item.home_create
   with_items: "{{ users }}"
+  no_log: "{{ true if item.password is defined or item.authorized_keys is defined else false }}"
   tags:
     - configuration
 
 - name: Linux | adding user's authorized keys
-  become: yes
+  become: true
   authorized_key:
     key: "{{ item.authorized_keys | default([]) | join('\n') }}"
     user: "{{ item.username }}"
     exclusive: "{{ item.authorized_keys_exclusive | default(users_authorized_keys_exclusive) }}"
   when: item.home_create is not defined or item.home_create
   with_items: "{{ users }}"
-  tags:
-    - configuration
-
-- name: Linux | adding user's to sudo
-  become: yes
-  user:
-    name: "{{ item.username }}"
-    groups: "{{ 'sudo' if ansible_os_family == 'Debian' else 'wheel' }}"
-  when: item.sudo_user is defined
-  with_items: "{{ users }}"
+  no_log: "{{ true if item.password is defined or item.authorized_keys is defined else false }}"
   tags:
     - configuration
