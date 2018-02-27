@@ -10,7 +10,7 @@
     comment: "{{ item.name | default(omit) }}"
     system: "{{ item.system | default(omit) }}"
     generate_ssh_key: "{{ item.ssh_key_generate | default(omit) }}"
-    group: "{{ omit if item.group is defined and item.group == item.username else (item.group if item.group is defined else (users_group if users_group else omit)) }}"
+    group: "{{ omit if item.group is defined and item.group == item.username else (item.group if item.group is defined else omit) }}"
     groups: "{{ item.groups|join(',') if item.groups is defined else users_groups|join(',')}}"
     append: "{{ item.append | default(omit) }}"
     password: "{{ item.password | default(lookup('password')) }}"
@@ -25,23 +25,12 @@
   tags:
     - configuration
 
-- name: Linux | adding user's to sudo
-  become: true
-  user:
-    name: "{{ item.username }}"
-    groups: "{{ users_sudo_group }}"
-  when: item.sudo_user == true
-  with_items: "{{ users }}"
-  no_log: "{{ true if item.password is defined or item.authorized_keys is defined else false }}"
-  tags:
-    - configuration
-
 - name: Linux | setting user's home permission
   become: true
   file:
     dest: "{{ item.home | default(users_home ~ '/' ~ item.username) }}"
     owner: "{{ item.username }}"
-    group: "{{ item.group if item.group is defined else (users_group if users_group else item.username) }}"
+    group: "{{ item.group if item.group is defined else item.username }}"
     mode: "{{ item.home_mode if item.home_mode is defined else users_home_mode }}"
   when: item.home_create is not defined or item.home_create
   with_items: "{{ users }}"
@@ -54,7 +43,7 @@
   file:
     path: "{{ item.home | default(users_home ~ '/' ~ item.username) }}/.ssh"
     owner: "{{ item.username }}"
-    group: "{{ item.group if item.group is defined else (users_group if users_group else item.username) }}"
+    group: "{{ item.group if item.group is defined else item.username }}"
     state: directory
     mode: '0700'
   when: item.home_create is not defined or item.home_create

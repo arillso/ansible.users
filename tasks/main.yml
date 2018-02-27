@@ -16,7 +16,13 @@
     loop_var: loop_vars
   tags:
     - configuration
-    - packages
+
+- name: add group users
+  set_fact:
+    users: "{{ users | union(users_group) }}"
+    when: users_group is defined and users is defined
+  tags:
+    - configuration
 
 - name: include distribution tasks
   include_tasks: "{{ loop_distribution }}"
@@ -26,19 +32,6 @@
         - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
         - "{{ ansible_distribution }}.yml"
         - "{{ ansible_os_family }}.yml"
-        - "defaults.yml"
-      paths:
-        - "distribution"
-  loop_control:
-    loop_var: loop_distribution
-  tags:
-    - configuration
-    - packages
-
-- name: include distribution tasks
-  include_tasks: "{{ loop_distribution }}"
-  with_first_found:
-    - files:
         - "{{ ansible_system }}.yml"
         - "defaults.yml"
       paths:
@@ -47,4 +40,3 @@
     loop_var: loop_distribution
   tags:
     - configuration
-    - packages
