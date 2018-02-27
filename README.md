@@ -21,6 +21,8 @@ None
 | Variable             | Default     | Comments (type)                                   |
 | :---                 | :---        | :---                                              |
 | users | [] | list of users to add, See defaults |
+| users_host_vars | [] | list of users to add by host vars, See users |
+| users_group_vars | [] | list of users to add by group vars,  See users |
 | users_home | /home |  users home directory |
 | users_home_mode | "0755" | default user's home directory permissions |
 | users_ssh_key_type | rsa | default user's ssh key type |
@@ -40,6 +42,11 @@ None
 ```
 
 ## Changelog
+
+### 1.3
+
+* add support for users on group and host vars layer
+* add support no log when password or key then aktive no log
 
 ### 1.2
 
