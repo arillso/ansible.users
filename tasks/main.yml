@@ -17,10 +17,19 @@
   tags:
     - configuration
 
-- name: add group users
-  set_fact:
-    users: "{{ users | union(users_group) }}"
-    when: users_group is defined and users is defined
+- block:
+
+    - name: add host users
+      set_fact:
+        users: "{{ users | union(users_host_vars) }}"
+      when: users_host_vars is defined
+
+    - name: add group users
+      set_fact:
+        users: "{{ users | union(users_group_vars) }}"
+      when: users_group_vars is defined
+
+  when: users is defined
   tags:
     - configuration
 

@@ -34,6 +34,10 @@
 
 # list of users to add
 users: []
+# list of users to add by host vars
+users_host_vars: []
+# list of users to add by group vars
+users_group_vars: []
 # users home directory
 users_home: /home
 # default user's primary group for users
