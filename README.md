@@ -43,6 +43,10 @@ None
 
 ## Changelog
 
+### 1.4
+
+* remove become in Windows
+
 ### 1.3
 
 * add support for users on group and host vars layer
