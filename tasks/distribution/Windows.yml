@@ -2,7 +2,6 @@
 # tasks file for arillso.users
 
 - name: Windows | adding users
-  become: true
   win_user:
     name: "{{ item.username }}"
     fullname: "{{ item.name | default(omit) }}"
@@ -21,7 +20,6 @@
   with_items: "{{ users }}"
 
 - name: Windows | hide user accounts from the login screen
-  become: true
   win_regedit:
     path: "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList"
     name: "{{ item.username }}"
@@ -32,7 +30,6 @@
 
 # https://superuser.com/questions/182375/always-display-the-last-default-user-windows-7-welcome-screen/182382#182382
 - name: Windows | UAC enable
-  become: true
   win_regedit:
     path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI"
     name: EnumerateAdministrators
