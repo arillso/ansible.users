@@ -2,31 +2,36 @@
 # tasks file for arillso.users
 
 - name: add OS specific variables
-  include_vars: "{{ loop_vars }}"
+  include_vars: '{{ loop_vars }}'
   with_first_found:
     - files:
-        - "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
-        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
-        - "defaults.yml"
+        - '{{ distribution }}-{{ distribution_verion }}.yml'
+        - '{{ distribution }}-{{ distribution_major_version }}.yml'
+        - '{{ distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+        - '{{ ansible_system }}.yml'
+        - 'defaults.yml'
       paths:
-        - "vars"
+        - 'vars'
   loop_control:
     loop_var: loop_vars
+  vars:
+    distribution: '{{ ansible_distribution }}'
+    distribution_verion: '{{ ansible_distribution_version }}'
+    distribution_major_version: '{{ ansible_distribution_major_version }}'
   tags:
     - configuration
+    - packages
 
 - block:
-
     - name: add host users
       set_fact:
-        users: "{{ users | union(users_host_vars) }}"
+        users: '{{ users | union(users_host_vars) }}'
       when: users_host_vars is defined
 
     - name: add group users
       set_fact:
-        users: "{{ users | union(users_group_vars) }}"
+        users: '{{ users | union(users_group_vars) }}'
       when: users_group_vars is defined
 
   when: users is defined
@@ -34,18 +39,22 @@
     - configuration
 
 - name: include distribution tasks
-  include_tasks: "{{ loop_distribution }}"
+  include_tasks: '{{ loop_distribution }}'
   with_first_found:
     - files:
-        - "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
-        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
-        - "{{ ansible_system }}.yml"
-        - "defaults.yml"
+        - '{{ distribution }}-{{ distribution_verion }}.yml'
+        - '{{ distribution }}-{{ distribution_major_version }}.yml'
+        - '{{ distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+        - '{{ ansible_system }}.yml'
+        - 'defaults.yml'
       paths:
-        - "distribution"
+        - 'distribution'
   loop_control:
     loop_var: loop_distribution
+  vars:
+    distribution: '{{ ansible_distribution }}'
+    distribution_verion: '{{ ansible_distribution_version }}'
+    distribution_major_version: '{{ ansible_distribution_major_version }}'
   tags:
     - configuration

@@ -35,9 +35,9 @@
 # list of users to add
 users: []
 # list of users to add by host vars
-users_host_vars: []
+users_list_host: []
 # list of users to add by group vars
-users_group_vars: []
+users_list_group: []
 # users home directory
 users_home: /home
 # default user's primary group for users
@@ -45,10 +45,10 @@ users_group:
 # default user's secondary groups
 users_groups: []
 # default user's home directory permissions
-users_home_mode: "0755"
+users_home_mode: '0755'
 # default user's ssh key type
 users_ssh_key_type: rsa
 # default user's ssh key bits
 users_ssh_key_bits: 2048
 # default user's setting for authorized keys exclusive
-users_authorized_keys_exclusive: no
+users_authorized_keys_exclusive: 'no'
