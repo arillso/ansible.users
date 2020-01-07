@@ -8,7 +8,7 @@ and [human-readable changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - update min ansible version to 2.8
-- changelog to your own file
+- moved changelog from readme
 - travis file has been updated
 - Documentation has been improved
 - change var `users_host_vars` to `users_list_host`
