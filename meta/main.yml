@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: arillso
-  description: Role which users manages on Linux and Windows.
+  description: Role to manage users on Linux and Windows.
   license: MIT
   min_ansible_version: 2.9
   platforms:
