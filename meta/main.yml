@@ -1,26 +1,31 @@
 ---
-
 galaxy_info:
   author: arillso
-  description: This is an Ansible role which users and user's authorized keys manages on Linux and Windows.
+  description: Role to manage users on Linux and Windows.
   license: MIT
-  min_ansible_version: 2
+  min_ansible_version: 2.9
   platforms:
-    - name: Debian
-      versions:
-        - wheezy
-        - jessie
-        - stretch
-    - name: Ubuntu
-      versions:
-        - trusty
-        - xenial
     - name: EL
       versions:
         - 6
         - 7
+    - name: Fedora
+      versions:
+        - 29
+    - name: Ubuntu
+      versions:
+        - bionic
+        - cosmic
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+        - buster
     - name: Windows
       versions:
         - all
+
   galaxy_tags:
     - system
+    - users
+    - user

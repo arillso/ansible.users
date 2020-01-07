@@ -1,37 +1,43 @@
 ---
 # tasks file for arillso.users
 
-- name: Windows | adding users
+- name: 'Windows : adding users'
   win_user:
-    name: "{{ item.username }}"
-    fullname: "{{ item.name | default(omit) }}"
+    name: '{{ item.username }}'
+    fullname: '{{ item.name | default(omit) }}'
     description: "{{ item.description | default('Windows User') }}"
-    password: "{{ item.password | default(omit) }}"
+    password: '{{ item.password | default(omit) }}'
     groups: "{{ item.groups | default('Benutzer') }}"
     state: "{{ item.state | default('present') }}"
     account_disabled: "{{ item.account_disabled | default('false') }}"
     groups_action: "{{ item.groups_action | default('replace') }}"
     account_locked: "{{ item.account_locked | default('false') }}"
-    password_never_expires: "{{ item.password_never_expires | default('true') }}"
+    password_never_expires: >
+      "{{ item.password_never_expires | default('true') }}"
     update_password: "{{ item.update_password | default('on_create') }}"
-    password_expired: "{{ item.password_expired | default() }}"
-    user_cannot_change_password: "{{ item.user_cannot_change_password | default('false') }}"
-  no_log: "{{ true if item.password is defined else false }}"
-  with_items: "{{ users }}"
+    password_expired: '{{ item.password_expired | default() }}'
+    user_cannot_change_password: >
+      "{{ item.user_cannot_change_password | default('false') }}"
+  no_log: '{{ true if item.password is defined else false }}'
+  with_items: '{{ users }}'
 
-- name: Windows | hide user accounts from the login screen
+- name: 'Windows : hide user accounts from the login screen'
   win_regedit:
-    path: "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList"
-    name: "{{ item.username }}"
+    path: "{{ path }}\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList"
+    name: '{{ item.username }}'
     type: dword
-  with_items: "{{ users }}"
-  no_log: "{{ true if item.password is defined else false }}"
+  with_items: '{{ users }}'
+  no_log: '{{ true if item.password is defined else false }}'
   when: item.hide
+  vars:
+    path: "HKLM:\\SOFTWARE\\Microsoft\\Windows NT"
 
 # https://superuser.com/questions/182375/always-display-the-last-default-user-windows-7-welcome-screen/182382#182382
-- name: Windows | UAC enable
+- name: 'Windows : UAC enable'
   win_regedit:
-    path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI"
+    path: "{{ path }}\\Windows\\CurrentVersion\\Policies\\CredUI"
     name: EnumerateAdministrators
     type: dword
     data: 00000000
+  vars:
+    path: "HKLM:\\SOFTWARE\\Microsoft"
