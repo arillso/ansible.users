@@ -12,12 +12,10 @@
     account_disabled: "{{ item.account_disabled | default('false') }}"
     groups_action: "{{ item.groups_action | default('replace') }}"
     account_locked: "{{ item.account_locked | default('false') }}"
-    password_never_expires: >
-      "{{ item.password_never_expires | default('true') }}"
+    password_never_expires: '{{ item.password_never_expires | default(omit) }}'
     update_password: "{{ item.update_password | default('on_create') }}"
     password_expired: "{{ item.password_expired | default('false') }}"
-    user_cannot_change_password: >
-      "{{ item.user_cannot_change_password | default('false') }}"
+    user_cannot_change_password: '{{ item.user_cannot_change_password | default(omit) }}'
   no_log: '{{ true if item.password is defined else false }}'
   with_items: '{{ users }}'
 
