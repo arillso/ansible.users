@@ -1,6 +1,12 @@
 ---
 # tasks file for arillso.users
 
+- name: 'Windows : check username length'
+  fail:
+    msg: 'The username can be a maximum of 20 characters long.'
+  when: 'item.username|length>20'
+  with_items: '{{ users }}'
+
 - name: 'Windows : adding users'
   win_user:
     name: '{{ item.username }}'
