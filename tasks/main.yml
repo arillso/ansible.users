@@ -26,13 +26,13 @@
 - block:
     - name: add host users
       set_fact:
-        users: '{{ users | union(users_host_vars) }}'
-      when: users_host_vars is defined
+        users: '{{ users | union(users_list_host) }}'
+      when: users_list_host is defined
 
     - name: add group users
       set_fact:
-        users: '{{ users | union(users_group_vars) }}'
-      when: users_group_vars is defined
+        users: '{{ users | union(users_list_group) }}'
+      when: users_list_group is defined
 
   when: users is defined
   tags:
