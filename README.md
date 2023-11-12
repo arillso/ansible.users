@@ -1,6 +1,10 @@
 # Ansible Role: users
 
-[![Build Status](https://img.shields.io/travis/arillso/ansible.users.svg?branch=master&style=popout-square)](https://travis-ci.org/arillso/ansible.users) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=popout-square)](https://sbaerlo.ch/licence) [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-users-blue.svg?style=popout-square)](https://galaxy.ansible.com/arillso/users) [![Ansible Role](https://img.shields.io/ansible/role/d/21607.svg?style=popout-square)](https://galaxy.ansible.com/arillso/users)
+## Important Update
+
+Please note that the ansible.users role has been moved to a new collection and will no longer be actively developed in this repository.
+For the latest version of the role, including new features and updates, please visit the new collection at <https://github.com/arillso/ansible.system/tree/main/roles/users>.
+ We encourage all users to switch to the updated role in the new collection for ongoing support and improvements.
 
 ## Description
 
